@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Nouvelle conversation{% endblock %}
+{% block content %}
+<h2>Nouvelle conversation</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">Créer</button>
+</form>
+{% endblock %}

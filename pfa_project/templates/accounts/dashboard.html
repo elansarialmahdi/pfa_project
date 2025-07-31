@@ -1,0 +1,49 @@
+ {% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Tableau de bord</h1>
+
+    {% if user.user_type == 'student' %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Mon binôme</h5>
+                {% if my_binome %}
+                    <p>{{ my_binome }}</p>
+                {% else %}
+                    <p class="text-muted">Vous n'avez pas encore de binôme.</p>
+                {% endif %}
+                <a href="{% url 'binomes:list' %}" class="btn btn-primary mt-2">Trouver un binôme</a>
+                <a href="{% url 'binomes:requests' %}" class="btn btn-outline-secondary mt-2">Voir les demandes reçues</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Demandes en attente</h5>
+                <p>{{ pending_requests }}</p>
+            </div>
+        </div>
+    {% elif user.user_type == 'teacher' %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Mes projets</h5>
+                {% if my_projects %}
+                    <ul>
+                        {% for project in my_projects %}
+                            <li><a href="{% url 'projects:detail' project.id %}">{{ project.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted">Aucun projet enregistré.</p>
+                {% endif %}
+                <a href="{% url 'projects:create' %}" class="btn btn-success mt-2">Créer un projet</a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+
+

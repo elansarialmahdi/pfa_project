@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Conversations{% endblock %}
+{% block content %}
+<h2>Mes conversations</h2>
+<a href="{% url 'messaging:create' %}" class="btn btn-primary mb-3">Nouvelle conversation</a>
+<ul>
+    {% for conv in conversations %}
+        <li>
+            <a href="{% url 'messaging:detail' conv.pk %}">
+                {% if conv.project %}
+                    {{ conv.project.title }}
+                {% else %}
+                    Conversation générale
+                {% endif %}
+            </a>
+        </li>
+    {% empty %}
+        <li>Pas de conversations encore.</li>
+    {% endfor %}
+</ul>
+{% endblock %} 
+
+
+

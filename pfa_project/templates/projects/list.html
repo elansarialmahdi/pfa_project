@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Liste des projets{% endblock %}
+{% block content %}
+<h2>Projets disponibles</h2>
+<div class="row">
+    {% for project in projects %}
+    <div class="col-md-6 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ project.title }}</h5>
+                <p class="card-text">{{ project.description|truncatewords:20 }}</p>
+                <a href="{% url 'projects:detail' project.pk %}" class="btn btn-primary">Voir détails</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>Aucun projet disponible.</p>
+    {% endfor %}
+</div>
+{% endblock %}
+
+

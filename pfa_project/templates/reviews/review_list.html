@@ -1,0 +1,45 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Équipe du projet</h2>
+<div class="team">
+    {% for member in team %}
+        <div class="card">
+            <img src="{{ member.photo.url }}" alt="{{ member.name }}" width="100">
+            <h3>{{ member.name }}</h3>
+            <p><strong>{{ member.get_role_display }}</strong></p>
+            <p>{{ member.bio }}</p>
+            <p>
+                {% if member.linkedin %}
+                    <a href="{{ member.linkedin }}" target="_blank">LinkedIn</a>
+                {% endif %}
+                {% if member.github %}
+                    | <a href="{{ member.github }}" target="_blank">GitHub</a>
+                {% endif %}
+            </p>
+        </div>
+    {% endfor %}
+</div>
+
+<hr>
+
+<h2>Avis des utilisateurs</h2>
+{% for review in reviews %}
+    <div class="review">
+        <strong>{{ review.user.get_full_name }} :</strong> 
+        <span>{{ review.rating }}/5</span>
+        <p>{{ review.comment }}</p>
+        <small>Posté le {{ review.created_at|date:"d M Y H:i" }}</small>
+    </div>
+    <hr>
+{% empty %}
+    <p>Aucun avis approuvé pour l’instant.</p>
+{% endfor %}
+
+{% if user.is_authenticated %}
+    <a href="{% url 'add_review' %}" class="btn btn-primary">Laisser un avis</a>
+{% else %}
+    <p><a href="{% url 'login' %}">Connectez-vous</a> pour laisser un avis.</p>
+{% endif %}
+{% endblock %}

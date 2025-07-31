@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Profil{% endblock %}
+{% block content %}
+<h2>Mon profil</h2>
+<p>Nom : {{ user.get_full_name }}</p>
+<p>Email : {{ user.email }}</p>
+<p>Type : {{ user.get_user_type_display }}</p>
+{% if user.profile_picture %}
+    <img src="{{ user.profile_picture.url }}" alt="photo" width="150">
+{% else %}
+    <p>Aucune photo de profil</p>
+{% endif %}
+<a href="{% url 'accounts:edit_profile' %}" class="btn btn-secondary">Modifier le profil</a>
+{% endblock %}

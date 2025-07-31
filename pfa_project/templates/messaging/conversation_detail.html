@@ -1,0 +1,22 @@
+
+{% extends 'base.html' %}
+{% block title %}Messages{% endblock %}
+{% block content %}
+<h2>Messages</h2>
+<div>
+    {% for message in conversation.messages.all %}
+        <div class="border p-2 mb-1 {% if message.sender == request.user %}bg-light{% endif %}">
+            <strong>{{ message.sender.get_full_name }}:</strong>
+            {{ message.content }}
+            <small class="text-muted float-right">{{ message.timestamp }}</small>
+        </div>
+    {% endfor %}
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <textarea name="content" class="form-control mt-3" placeholder="Votre message..."></textarea>
+    <button class="btn btn-primary mt-2">Envoyer</button>
+</form>
+{% endblock %}
+

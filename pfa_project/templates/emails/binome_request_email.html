@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Nouvelle demande de binôme</title>
+</head>
+<body>
+    <h2>Bonjour {{ to_student.first_name }},</h2>
+
+    <p>{{ from_student.get_full_name }} vous a envoyé une demande de binôme.</p>
+
+    {% if message %}
+    <blockquote style="border-left: 3px solid #ccc; margin: 1em 0; padding-left: 1em;">
+        {{ message }}
+    </blockquote>
+    {% endif %}
+
+    <p>Connectez-vous à la plateforme pour accepter ou refuser la demande.</p>
+
+    <p>Merci,<br>L’équipe PFA Management</p>
+</body>
+</html>

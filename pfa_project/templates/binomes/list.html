@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Choix de binôme{% endblock %}
+{% block content %}
+<h2>Étudiants disponibles</h2>
+<ul>
+    {% for student in students %}
+        <li>
+            {{ student.get_full_name }}
+            <form method="post" action="{% url 'binomes:send_request' student.id %}" style="display:inline;">
+                {% csrf_token %}
+                <input type="hidden" name="message" value="Souhaitez-vous faire un binôme ?">
+                <button class="btn btn-sm btn-outline-primary">Envoyer une demande</button>
+            </form>
+        </li>
+    {% empty %}
+        <li>Aucun étudiant disponible.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

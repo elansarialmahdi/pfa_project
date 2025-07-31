@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Créer un projet{% endblock %}
+{% block content %}
+<h2>{% if form.instance.pk %}Modifier le projet{% else %}Créer un projet{% endif %}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary">Enregistrer</button>
+</form>
+{% endblock %}
